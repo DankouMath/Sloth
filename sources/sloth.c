@@ -132,6 +132,68 @@ void drawRectFill(POINT p1, POINT p2, COLOR color)
 	
 }
 
+//Andre's Circle Algorythm
+void drawCircle(point center, int radius, color c)
+{
+	int x_center = (int)center.x; int y_center = (int)center.y;
+	int x = 0; int y = radius; int d = y - 1;
+	
+	while(y>=x)
+	{ 
+        render_pixel( x_center + x , y_center + y, c);
+        render_pixel( x_center + y , y_center + x, c);
+        render_pixel( x_center - x , y_center + y, c);
+        render_pixel( x_center - y , y_center + x, c);
+        render_pixel( x_center + x , y_center - y, c);
+        render_pixel( x_center + y , y_center - x, c);
+        render_pixel( x_center - x , y_center - y, c);
+        render_pixel( x_center - y , y_center - x, c);
+		if(d >= 2*x){ 
+			d = d-2*x-1;
+			x = x+1;
+		}
+		else if(d < 2*(radius-y)){
+			d = d+2*y-1;
+			y = y-1;
+		}
+		else{ 
+			d = d+2*(y-x-1);
+			y = y-1;
+			x = x+1;
+		}
+	}
+}
+
+void drawCircleFill(point center, int radius, color c)
+{
+	point min, max, p;
+	float dx, dy;
+	int x, y;
+	
+	min.x = center.x - radius; max.x = center.x + radius;
+	min.y = center.y - radius; max.y = center.y + radius;
+	for (x = min.x ; x <= max.x ; x++)
+	{
+		dx = x - center.x;
+		for (y = min.y; y <= max.y; y++)
+		{
+			dy = y - center.y;
+			if ((float)(dx * dx + dy * dy <= radius * radius))
+			{
+				p.x = x; p.y = y;
+				drawPixel(p, c);
+			}
+		}
+	}
+}
+
+void drawTriangle(point p1, point p2, point p3, color c)
+{
+	drawLine(p1, p2, c);
+	drawLine(p2, p3, c);
+	drawLine(p3, p1, c);
+}
+
 void fillScreen(color c)
 {
 	SDL_FillRect(screen, NULL, c);

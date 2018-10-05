@@ -54,6 +54,9 @@ void drawPixel(POINT p, COLOR c);
 void drawLine(POINT p1, POINT p2, COLOR color);
 void drawRect(POINT p1, POINT p2, COLOR c);
 void drawRectFill(POINT p1, POINT p2, COLOR c);
+void drawCircle(point center, int radius, color c);
+void drawCircleFill(point center, int radius, color c);
+void drawTriangle(point p1, point p2, point p3, color c);
 void fillScreen(color c);
 /**Texture**/
 texture loadBmp(char *path, color key);
