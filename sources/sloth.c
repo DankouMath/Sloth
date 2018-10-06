@@ -461,6 +461,12 @@ int getMouseX(){ return in.mouse.x; }
 int getMouseY(){ return H - in.mouse.y; }
 int getMouseB(int numbutton){ return in.mousebuttons[numbutton]; }
 
+void waitKey(int numkey)
+{
+	while(!shouldClose() && !getKey(k_escape) && !getKey(numkey))
+		updateInput();
+}
+
 /**Time**/
 float getDt()
 {

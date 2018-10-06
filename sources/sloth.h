@@ -58,6 +58,7 @@ void drawCircle(point center, int radius, color c);
 void drawCircleFill(point center, int radius, color c);
 void drawTriangle(point p1, point p2, point p3, color c);
 void fillScreen(color c);
+
 /**Texture**/
 texture loadBmp(char *path, color key);
 void drawSprite(texture tex, point p);
@@ -90,6 +91,7 @@ int getKey(int numkey);
 int getMouseB(int numbutton);
 int getMouseX();
 int getMouseY();
+void waitKey(int numkey);
 
 /**Time**/
 float getDt();
