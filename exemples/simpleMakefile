@@ -1,0 +1,12 @@
+CC = gcc
+CFLAGS =
+INCLUDES = -I"sloth.h folder"
+LIBS = -L"libsloth.a folder" -lsloth -lSDL -lSDL_ttf
+SRC = samplecfile.c
+EXEC = yourproject.out
+
+all: $(SRC)
+	$(CC) $(SRC) $(INCLUDES) $(LIBS) -o test
+
+clean:
+	rm $(EXEC)
