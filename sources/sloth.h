@@ -57,6 +57,7 @@ void drawRectFill(POINT p1, POINT p2, COLOR c);
 void drawCircle(point center, int radius, color c);
 void drawCircleFill(point center, int radius, color c);
 void drawTriangle(point p1, point p2, point p3, color c);
+void drawTriangleFill(point p1, point p2, point p3, color c);
 void fillScreen(color c);
 
 /**Texture**/

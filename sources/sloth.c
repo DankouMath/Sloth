@@ -194,6 +194,55 @@ void drawTriangle(point p1, point p2, point p3, color c)
 	drawLine(p3, p1, c);
 }
 
+void drawTriangleFill(point p1, point p2, point p3, color c)
+{
+	
+	void fillBotFlatTri(point p1, point p2, point p3, color c)
+	{
+		point curr1, curr2; int scanlineY;
+		float invslope1 = (p1.x - p2.x) / (p1.y - p2.y);
+		float invslope2 = (p1.x - p3.x) / (p1.y - p3.y);
+		curr1.x = curr2.x = p1.x;
+	
+		for(scanlineY = p1.y; scanlineY >= p2.y; scanlineY--)
+		{
+			curr1.y = curr2.y = scanlineY;
+			drawLine(curr1, curr2, c);
+			curr1.x -= invslope1;
+			curr2.x -= invslope2;
+		}
+	}
+	void fillTopFlatTri(point p1, point p2, point p3, color c)
+	{
+		point curr1, curr2; int scanlineY;
+		float invslope1 = (p1.x - p3.x) / (p1.y - p3.y);
+		float invslope2 = (p2.x - p3.x) / (p2.y - p3.y);
+		curr1.x = curr2.x = p3.x;
+	
+		for(scanlineY = p3.y; scanlineY <= p1.y; scanlineY++)
+		{
+			curr1.y = curr2.y = scanlineY;
+			drawLine(curr1, curr2, c);
+			curr1.x += invslope1;
+			curr2.x += invslope2;
+		}
+	}
+	
+	point tmp;
+	if(p1.y < p2.y){tmp = p2; p2 = p1; p1 = tmp;} 
+	if(p2.y < p3.y){tmp = p3; p3 = p2; p2 = tmp;}
+	if(p1.y < p2.y){tmp = p2; p2 = p1; p1 = tmp;}
+	
+	if (p2.y == p3.y){ fillBotFlatTri(p1, p2, p3, c); }
+	else if(p1.y == p2.y){ fillTopFlatTri(p1, p2, p3, c); }
+	else
+	{
+		point p4 = {p1.x + ((p2.y - p1.y) / (p3.y - p1.y)) * (p3.x - p1.x), p2.y};
+		fillBotFlatTri(p1, p2, p4, c);
+		fillTopFlatTri(p2, p4, p3, c);
+	}
+}
+
 void fillScreen(color c)
 {
 	SDL_FillRect(screen, NULL, c);
